@@ -1,0 +1,37 @@
+{
+  "image": "4.2.03",
+  "size": [
+    512,
+    512
+  ],
+  "n": 2,
+  "l": 10,
+  "bins": 320,
+  "valid_pixels": 260610,
+  "ME": 1,
+  "LE": 114,
+  "ME_LE_match_plaintext": true,
+  "capacity_bits": 18102,
+  "embedding_rate_bpp": 0.0691,
+  "embed_bit_exact_vs_plaintext": true,
+  "psnr1_plain_marked": 48.4726,
+  "psnr2_mpc_marked": 48.4726,
+  "psnr3_plain_extract_on_MI": "inf",
+  "psnr4_mpc_extract_on_shares": "inf",
+  "bits_correct": true,
+  "extraction_paths_agree": true,
+  "overflow_pixels_in_marked": 35,
+  "timings_sec": {
+    "encrypt": 0.018671035766601562,
+    "prediction": 4.918115854263306,
+    "abs_value": 1.4782934188842773,
+    "histogram": 402.8081202507019,
+    "embed": 4.098041772842407,
+    "extract_sequential": 11579.822857379913
+  },
+  "total_mpc_sec": 11993.1441,
+  "plain_embed_sec": 0.1217,
+  "plain_extract_sec": 0.253,
+  "this_session_wall_sec": 11994.4168,
+  "note": "single process simulating both parties; no network latency; grayscale; n=2"
+}

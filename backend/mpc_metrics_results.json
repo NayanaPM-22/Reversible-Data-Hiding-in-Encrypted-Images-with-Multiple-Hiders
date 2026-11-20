@@ -1,0 +1,594 @@
+{
+  "runs": [
+    {
+      "h": 16,
+      "w": 16,
+      "n": 2,
+      "l": 10,
+      "valid_pixels": 210,
+      "ME": 1,
+      "LE": 22,
+      "hist_bins": 113,
+      "ME_LE_match_plaintext": true,
+      "embed_bit_exact_vs_plaintext": true,
+      "psnr1_plain_marked": 50.394767382349876,
+      "psnr2_mpc_marked": 50.394767382349876,
+      "psnr3_plain_extract_on_MI": "inf",
+      "psnr4_mpc_extract_on_shares": "inf",
+      "capacity_bits": 17,
+      "embedding_rate_bpp": 0.06640625,
+      "bits_correct": true,
+      "extraction_paths_agree": true,
+      "overflow_pixels_in_marked": 0,
+      "data_expansion_total": 2.5,
+      "data_expansion_per_hider": 1.25,
+      "plain_embed_sec": 0.00033549999352544546,
+      "plain_extract_sec": 0.00021059997379779816,
+      "stages": {
+        "encrypt": {
+          "time_sec": 0.00041310000233352184,
+          "rounds": 0,
+          "comm_bits": 0
+        },
+        "prediction": {
+          "time_sec": 0.01062889990862459,
+          "rounds": 54,
+          "comm_bits": 44100
+        },
+        "error": {
+          "time_sec": 3.320001997053623e-05,
+          "rounds": 0,
+          "comm_bits": 0
+        },
+        "abs_value": {
+          "time_sec": 0.0032170999329537153,
+          "rounds": 12,
+          "comm_bits": 25088
+        },
+        "histogram": {
+          "time_sec": 0.3203641000436619,
+          "rounds": 1356,
+          "comm_bits": 1378600
+        },
+        "embed": {
+          "time_sec": 0.00996209995355457,
+          "rounds": 36,
+          "comm_bits": 57960
+        },
+        "receiver_combine": {
+          "time_sec": 2.719997428357601e-05,
+          "rounds": 0,
+          "comm_bits": 0
+        },
+        "extract_sequential": {
+          "time_sec": 3.684074499993585,
+          "rounds": 23491,
+          "comm_bits": 130154
+        }
+      },
+      "image": "4.1.01.tiff",
+      "size": 16
+    },
+    {
+      "h": 16,
+      "w": 16,
+      "n": 2,
+      "l": 10,
+      "valid_pixels": 210,
+      "ME": 1,
+      "LE": 19,
+      "hist_bins": 57,
+      "ME_LE_match_plaintext": true,
+      "embed_bit_exact_vs_plaintext": true,
+      "psnr1_plain_marked": 49.7580765836561,
+      "psnr2_mpc_marked": 49.7580765836561,
+      "psnr3_plain_extract_on_MI": "inf",
+      "psnr4_mpc_extract_on_shares": "inf",
+      "capacity_bits": 23,
+      "embedding_rate_bpp": 0.08984375,
+      "bits_correct": true,
+      "extraction_paths_agree": true,
+      "overflow_pixels_in_marked": 0,
+      "data_expansion_total": 2.5,
+      "data_expansion_per_hider": 1.25,
+      "plain_embed_sec": 0.00013149995356798172,
+      "plain_extract_sec": 0.00020600005518645048,
+      "stages": {
+        "encrypt": {
+          "time_sec": 4.1499966755509377e-05,
+          "rounds": 0,
+          "comm_bits": 0
+        },
+        "prediction": {
+          "time_sec": 0.010452399961650372,
+          "rounds": 54,
+          "comm_bits": 44100
+        },
+        "error": {
+          "time_sec": 2.989999484270811e-05,
+          "rounds": 0,
+          "comm_bits": 0
+        },
+        "abs_value": {
+          "time_sec": 0.0035177000099793077,
+          "rounds": 12,
+          "comm_bits": 25088
+        },
+        "histogram": {
+          "time_sec": 0.1544143999926746,
+          "rounds": 684,
+          "comm_bits": 695400
+        },
+        "embed": {
+          "time_sec": 0.008972000097855926,
+          "rounds": 36,
+          "comm_bits": 57960
+        },
+        "receiver_combine": {
+          "time_sec": 2.7499976567924023e-05,
+          "rounds": 0,
+          "comm_bits": 0
+        },
+        "extract_sequential": {
+          "time_sec": 3.5765142999589443,
+          "rounds": 23377,
+          "comm_bits": 130286
+        }
+      },
+      "image": "4.1.02.tiff",
+      "size": 16
+    },
+    {
+      "h": 24,
+      "w": 24,
+      "n": 2,
+      "l": 10,
+      "valid_pixels": 506,
+      "ME": 1,
+      "LE": 37,
+      "hist_bins": 111,
+      "ME_LE_match_plaintext": true,
+      "embed_bit_exact_vs_plaintext": true,
+      "psnr1_plain_marked": 49.39025574130391,
+      "psnr2_mpc_marked": 49.39025574130391,
+      "psnr3_plain_extract_on_MI": "inf",
+      "psnr4_mpc_extract_on_shares": "inf",
+      "capacity_bits": 59,
+      "embedding_rate_bpp": 0.10243055555555555,
+      "bits_correct": true,
+      "extraction_paths_agree": true,
+      "overflow_pixels_in_marked": 0,
+      "data_expansion_total": 2.5,
+      "data_expansion_per_hider": 1.25,
+      "plain_embed_sec": 0.00024960003793239594,
+      "plain_extract_sec": 0.0004882999928668141,
+      "stages": {
+        "encrypt": {
+          "time_sec": 4.529999569058418e-05,
+          "rounds": 0,
+          "comm_bits": 0
+        },
+        "prediction": {
+          "time_sec": 0.013922799960710108,
+          "rounds": 54,
+          "comm_bits": 106260
+        },
+        "error": {
+          "time_sec": 4.39999857917428e-05,
+          "rounds": 0,
+          "comm_bits": 0
+        },
+        "abs_value": {
+          "time_sec": 0.004063799977302551,
+          "rounds": 12,
+          "comm_bits": 56448
+        },
+        "histogram": {
+          "time_sec": 0.383445700048469,
+          "rounds": 1332,
+          "comm_bits": 3259848
+        },
+        "embed": {
+          "time_sec": 0.013308899942785501,
+          "rounds": 36,
+          "comm_bits": 139656
+        },
+        "receiver_combine": {
+          "time_sec": 2.2400054149329662e-05,
+          "rounds": 0,
+          "comm_bits": 0
+        },
+        "extract_sequential": {
+          "time_sec": 8.671936700004153,
+          "rounds": 56252,
+          "comm_bits": 313710
+        }
+      },
+      "image": "4.1.01.tiff",
+      "size": 24
+    },
+    {
+      "h": 24,
+      "w": 24,
+      "n": 2,
+      "l": 10,
+      "valid_pixels": 506,
+      "ME": 1,
+      "LE": 27,
+      "hist_bins": 51,
+      "ME_LE_match_plaintext": true,
+      "embed_bit_exact_vs_plaintext": true,
+      "psnr1_plain_marked": 49.471624769160805,
+      "psnr2_mpc_marked": 49.471624769160805,
+      "psnr3_plain_extract_on_MI": "inf",
+      "psnr4_mpc_extract_on_shares": "inf",
+      "capacity_bits": 67,
+      "embedding_rate_bpp": 0.11631944444444445,
+      "bits_correct": true,
+      "extraction_paths_agree": true,
+      "overflow_pixels_in_marked": 2,
+      "data_expansion_total": 2.5,
+      "data_expansion_per_hider": 1.25,
+      "plain_embed_sec": 0.0002487000310793519,
+      "plain_extract_sec": 0.00048429996240884066,
+      "stages": {
+        "encrypt": {
+          "time_sec": 4.47999918833375e-05,
+          "rounds": 0,
+          "comm_bits": 0
+        },
+        "prediction": {
+          "time_sec": 0.014519400079734623,
+          "rounds": 54,
+          "comm_bits": 106260
+        },
+        "error": {
+          "time_sec": 4.2100087739527225e-05,
+          "rounds": 0,
+          "comm_bits": 0
+        },
+        "abs_value": {
+          "time_sec": 0.004050799994729459,
+          "rounds": 12,
+          "comm_bits": 56448
+        },
+        "histogram": {
+          "time_sec": 0.17444129998330027,
+          "rounds": 612,
+          "comm_bits": 1497768
+        },
+        "embed": {
+          "time_sec": 0.011313299997709692,
+          "rounds": 36,
+          "comm_bits": 139656
+        },
+        "receiver_combine": {
+          "time_sec": 2.3000058718025684e-05,
+          "rounds": 0,
+          "comm_bits": 0
+        },
+        "extract_sequential": {
+          "time_sec": 8.562980000046082,
+          "rounds": 56060,
+          "comm_bits": 312286
+        }
+      },
+      "image": "4.1.02.tiff",
+      "size": 24
+    },
+    {
+      "h": 32,
+      "w": 32,
+      "n": 2,
+      "l": 10,
+      "valid_pixels": 930,
+      "ME": 1,
+      "LE": 43,
+      "hist_bins": 99,
+      "ME_LE_match_plaintext": true,
+      "embed_bit_exact_vs_plaintext": true,
+      "psnr1_plain_marked": 49.30173564447874,
+      "psnr2_mpc_marked": 49.30173564447874,
+      "psnr3_plain_extract_on_MI": "inf",
+      "psnr4_mpc_extract_on_shares": "inf",
+      "capacity_bits": 124,
+      "embedding_rate_bpp": 0.12109375,
+      "bits_correct": true,
+      "extraction_paths_agree": true,
+      "overflow_pixels_in_marked": 1,
+      "data_expansion_total": 2.5,
+      "data_expansion_per_hider": 1.25,
+      "plain_embed_sec": 0.0004189000464975834,
+      "plain_extract_sec": 0.0009591999696567655,
+      "stages": {
+        "encrypt": {
+          "time_sec": 5.340005736798048e-05,
+          "rounds": 0,
+          "comm_bits": 0
+        },
+        "prediction": {
+          "time_sec": 0.017412599991075695,
+          "rounds": 54,
+          "comm_bits": 195300
+        },
+        "error": {
+          "time_sec": 5.609996151179075e-05,
+          "rounds": 0,
+          "comm_bits": 0
+        },
+        "abs_value": {
+          "time_sec": 0.0057342000072821975,
+          "rounds": 12,
+          "comm_bits": 100352
+        },
+        "histogram": {
+          "time_sec": 0.44604909990448505,
+          "rounds": 1188,
+          "comm_bits": 5342040
+        },
+        "embed": {
+          "time_sec": 0.015481000067666173,
+          "rounds": 36,
+          "comm_bits": 256680
+        },
+        "receiver_combine": {
+          "time_sec": 3.0499999411404133e-05,
+          "rounds": 0,
+          "comm_bits": 0
+        },
+        "extract_sequential": {
+          "time_sec": 15.679675800027326,
+          "rounds": 103020,
+          "comm_bits": 574028
+        }
+      },
+      "image": "4.1.01.tiff",
+      "size": 32
+    },
+    {
+      "h": 32,
+      "w": 32,
+      "n": 2,
+      "l": 10,
+      "valid_pixels": 930,
+      "ME": 1,
+      "LE": 33,
+      "hist_bins": 78,
+      "ME_LE_match_plaintext": true,
+      "embed_bit_exact_vs_plaintext": true,
+      "psnr1_plain_marked": 49.2851066076247,
+      "psnr2_mpc_marked": 49.2851066076247,
+      "psnr3_plain_extract_on_MI": "inf",
+      "psnr4_mpc_extract_on_shares": "inf",
+      "capacity_bits": 130,
+      "embedding_rate_bpp": 0.126953125,
+      "bits_correct": true,
+      "extraction_paths_agree": true,
+      "overflow_pixels_in_marked": 10,
+      "data_expansion_total": 2.5,
+      "data_expansion_per_hider": 1.25,
+      "plain_embed_sec": 0.0004350000526756048,
+      "plain_extract_sec": 0.0009397999383509159,
+      "stages": {
+        "encrypt": {
+          "time_sec": 7.82000133767724e-05,
+          "rounds": 0,
+          "comm_bits": 0
+        },
+        "prediction": {
+          "time_sec": 0.017953500035218894,
+          "rounds": 54,
+          "comm_bits": 195300
+        },
+        "error": {
+          "time_sec": 5.259993486106396e-05,
+          "rounds": 0,
+          "comm_bits": 0
+        },
+        "abs_value": {
+          "time_sec": 0.005731699988245964,
+          "rounds": 12,
+          "comm_bits": 100352
+        },
+        "histogram": {
+          "time_sec": 0.348981500021182,
+          "rounds": 936,
+          "comm_bits": 4208880
+        },
+        "embed": {
+          "time_sec": 0.014598599984310567,
+          "rounds": 36,
+          "comm_bits": 256680
+        },
+        "receiver_combine": {
+          "time_sec": 2.9699993319809437e-05,
+          "rounds": 0,
+          "comm_bits": 0
+        },
+        "extract_sequential": {
+          "time_sec": 15.438880100031383,
+          "rounds": 102885,
+          "comm_bits": 573320
+        }
+      },
+      "image": "4.1.02.tiff",
+      "size": 32
+    },
+    {
+      "h": 48,
+      "w": 48,
+      "n": 2,
+      "l": 10,
+      "valid_pixels": 2162,
+      "ME": 1,
+      "LE": 52,
+      "hist_bins": 88,
+      "ME_LE_match_plaintext": true,
+      "embed_bit_exact_vs_plaintext": true,
+      "psnr1_plain_marked": 49.278350027093616,
+      "psnr2_mpc_marked": 49.278350027093616,
+      "psnr3_plain_extract_on_MI": "inf",
+      "psnr4_mpc_extract_on_shares": "inf",
+      "capacity_bits": 328,
+      "embedding_rate_bpp": 0.1423611111111111,
+      "bits_correct": true,
+      "extraction_paths_agree": true,
+      "overflow_pixels_in_marked": 1,
+      "data_expansion_total": 2.5,
+      "data_expansion_per_hider": 1.25,
+      "plain_embed_sec": 0.000965600018389523,
+      "plain_extract_sec": 0.0020724000642076135,
+      "stages": {
+        "encrypt": {
+          "time_sec": 9.039998985826969e-05,
+          "rounds": 0,
+          "comm_bits": 0
+        },
+        "prediction": {
+          "time_sec": 0.0329939000075683,
+          "rounds": 54,
+          "comm_bits": 454020
+        },
+        "error": {
+          "time_sec": 9.320001117885113e-05,
+          "rounds": 0,
+          "comm_bits": 0
+        },
+        "abs_value": {
+          "time_sec": 0.009923200006596744,
+          "rounds": 12,
+          "comm_bits": 225792
+        },
+        "histogram": {
+          "time_sec": 0.6851694999495521,
+          "rounds": 1056,
+          "comm_bits": 11036608
+        },
+        "embed": {
+          "time_sec": 0.027258199988864362,
+          "rounds": 36,
+          "comm_bits": 596712
+        },
+        "receiver_combine": {
+          "time_sec": 7.599999662488699e-05,
+          "rounds": 0,
+          "comm_bits": 0
+        },
+        "extract_sequential": {
+          "time_sec": 36.479046800057404,
+          "rounds": 238531,
+          "comm_bits": 1327020
+        }
+      },
+      "image": "4.1.01.tiff",
+      "size": 48
+    },
+    {
+      "h": 48,
+      "w": 48,
+      "n": 2,
+      "l": 10,
+      "valid_pixels": 2162,
+      "ME": 1,
+      "LE": 40,
+      "hist_bins": 101,
+      "ME_LE_match_plaintext": true,
+      "embed_bit_exact_vs_plaintext": true,
+      "psnr1_plain_marked": 49.2808057494203,
+      "psnr2_mpc_marked": 49.2808057494203,
+      "psnr3_plain_extract_on_MI": "inf",
+      "psnr4_mpc_extract_on_shares": "inf",
+      "capacity_bits": 331,
+      "embedding_rate_bpp": 0.14366319444444445,
+      "bits_correct": true,
+      "extraction_paths_agree": true,
+      "overflow_pixels_in_marked": 17,
+      "data_expansion_total": 2.5,
+      "data_expansion_per_hider": 1.25,
+      "plain_embed_sec": 0.0009091999381780624,
+      "plain_extract_sec": 0.0021886000176891685,
+      "stages": {
+        "encrypt": {
+          "time_sec": 0.00011060002725571394,
+          "rounds": 0,
+          "comm_bits": 0
+        },
+        "prediction": {
+          "time_sec": 0.03233760001603514,
+          "rounds": 54,
+          "comm_bits": 454020
+        },
+        "error": {
+          "time_sec": 0.00010400009341537952,
+          "rounds": 0,
+          "comm_bits": 0
+        },
+        "abs_value": {
+          "time_sec": 0.009513499913737178,
+          "rounds": 12,
+          "comm_bits": 225792
+        },
+        "histogram": {
+          "time_sec": 0.7999925999902189,
+          "rounds": 1212,
+          "comm_bits": 12667016
+        },
+        "embed": {
+          "time_sec": 0.028214000049047172,
+          "rounds": 36,
+          "comm_bits": 596712
+        },
+        "receiver_combine": {
+          "time_sec": 6.790005136281252e-05,
+          "rounds": 0,
+          "comm_bits": 0
+        },
+        "extract_sequential": {
+          "time_sec": 36.23520350002218,
+          "rounds": 238461,
+          "comm_bits": 1326566
+        }
+      },
+      "image": "4.1.02.tiff",
+      "size": 48
+    }
+  ],
+  "protocol_bench": {
+    "Mul": {
+      "rounds": 1,
+      "comm_bits_per_elem_all_parties": 40.0,
+      "time_us_per_elem": 0.17914996715262532,
+      "correct": true
+    },
+    "B2A": {
+      "rounds": 1,
+      "comm_bits_per_elem_all_parties": 2.0,
+      "time_us_per_elem": 0.06779999239370227,
+      "correct": true
+    },
+    "RS": {
+      "rounds": 18,
+      "comm_bits_per_elem_all_parties": 70.0,
+      "time_us_per_elem": 4.890899988822639,
+      "correct": true
+    },
+    "Cmp": {
+      "rounds": 10,
+      "comm_bits_per_elem_all_parties": 56.0,
+      "time_us_per_elem": 3.741299966350198,
+      "correct": true
+    },
+    "Eq": {
+      "rounds": 10,
+      "comm_bits_per_elem_all_parties": 56.0,
+      "time_us_per_elem": 3.227849956601858,
+      "correct": true
+    }
+  },
+  "projection_512": {
+    "extract_sequential": 4382.5302429934645,
+    "histogram_320_bins": 303.10801373629454,
+    "histogram_measured_bins": 89.51158530649948,
+    "prediction_abs_embed": 8.452370638128965
+  }
+}

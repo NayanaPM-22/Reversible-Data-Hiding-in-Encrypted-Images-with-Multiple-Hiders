@@ -1,0 +1,729 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RDHEI-MH | Secure Multiparty Data Hiding</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔐</text></svg>"
+    />
+    <style>
+      :root {
+        --bg: #f4f6fb;
+        --card-bg: #ffffff;
+        --border: #e5e9f0;
+        --text: #1a202c;
+        --text-muted: #6b7280;
+        --accent: #4338ca;
+        --accent-hover: #3730a3;
+        --accent-light: #eef2ff;
+        --error-bg: #fef2f2;
+        --error-text: #b91c1c;
+        --error-border: #fecaca;
+        --success-bg: #f0fdf4;
+        --success-text: #15803d;
+        --success-border: #bbf7d0;
+        --radius: 14px;
+        --shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background: var(--bg);
+        color: var(--text);
+        font-family:
+          "Segoe UI",
+          -apple-system,
+          BlinkMacSystemFont,
+          Roboto,
+          sans-serif;
+        overflow: hidden;
+      }
+      #app {
+        max-width: 840px;
+        margin: 0 auto;
+        height: 100vh;
+        padding: 20px 24px;
+        display: flex;
+        flex-direction: column;
+      }
+      header {
+        text-align: center;
+        margin-bottom: 16px;
+        flex-shrink: 0;
+      }
+      header h1 {
+        font-size: 25px;
+        font-weight: 700;
+        margin: 0 0 4px;
+        letter-spacing: -0.3px;
+      }
+      .credits-line {
+        color: var(--text-muted);
+        font-size: 12px;
+        margin: 2px 0 0;
+      }
+      .credits-line b {
+        color: var(--text);
+        font-weight: 600;
+      }
+
+      .progress {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 10px;
+        margin: 14px 0;
+        font-size: 13px;
+        font-weight: 600;
+        flex-shrink: 0;
+        box-shadow: var(--shadow);
+      }
+      .progress span {
+        color: var(--text-muted);
+      }
+      .progress span.active {
+        color: var(--accent);
+      }
+      .progress span.done {
+        color: #16a34a;
+      }
+
+      .card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 26px 28px;
+        flex: 1;
+        overflow-y: auto;
+        box-shadow: var(--shadow-md);
+      }
+      .card h2 {
+        margin: 0 0 6px;
+        font-size: 18px;
+        font-weight: 700;
+      }
+      .card p.desc {
+        color: var(--text-muted);
+        font-size: 13.5px;
+        line-height: 1.55;
+        margin: 0 0 4px;
+      }
+
+      label {
+        display: block;
+        font-size: 12.5px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+        color: var(--text-muted);
+        margin: 16px 0 6px;
+      }
+      input[type="number"],
+      input[type="text"],
+      textarea,
+      input[type="file"] {
+        width: 100%;
+        padding: 10px 13px;
+        border-radius: 9px;
+        border: 1.5px solid var(--border);
+        font-size: 14px;
+        background: #fafbfc;
+        transition: border-color 0.15s;
+      }
+      input:focus,
+      textarea:focus {
+        outline: none;
+        border-color: var(--accent);
+        background: #fff;
+      }
+      textarea {
+        resize: none;
+        min-height: 64px;
+        font-family: inherit;
+      }
+      .hint {
+        font-size: 11.5px;
+        color: var(--text-muted);
+        margin-top: 5px;
+      }
+
+      button {
+        background: var(--accent);
+        color: white;
+        border: none;
+        padding: 11px 22px;
+        border-radius: 9px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        margin-top: 18px;
+        transition:
+          background 0.15s,
+          transform 0.1s;
+      }
+      button:hover:not(:disabled) {
+        background: var(--accent-hover);
+      }
+      button:active:not(:disabled) {
+        transform: scale(0.98);
+      }
+      button.secondary {
+        background: var(--accent-light);
+        color: var(--accent);
+      }
+      button.secondary:hover:not(:disabled) {
+        background: #e0e7ff;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+      }
+
+      .msg {
+        padding: 13px 15px;
+        border-radius: 10px;
+        font-size: 13px;
+        margin-top: 14px;
+        white-space: pre-wrap;
+        line-height: 1.6;
+        border: 1px solid transparent;
+        font-family: -apple-system, "Segoe UI", sans-serif;
+      }
+      .msg.error {
+        background: var(--error-bg);
+        color: var(--error-text);
+        border-color: var(--error-border);
+      }
+      .msg.success {
+        background: var(--success-bg);
+        color: var(--success-text);
+        border-color: var(--success-border);
+      }
+      .msg strong {
+        font-weight: 700;
+      }
+
+      /* ---- Image gallery: proper aspect ratio, no cropping, clickable ---- */
+      .gallery {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 16px;
+      }
+      .thumb-wrap {
+        width: 130px;
+        height: 130px;
+        border-radius: 10px;
+        border: 1.5px solid var(--border);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        cursor: zoom-in;
+        position: relative;
+        background: #f0f1f4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+          transform 0.15s,
+          box-shadow 0.15s;
+      }
+      .thumb-wrap:hover {
+        transform: scale(1.03);
+        box-shadow: var(--shadow-md);
+      }
+      .thumb-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+      .thumb-label {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.55);
+        color: white;
+        font-size: 10.5px;
+        text-align: center;
+        padding: 3px 0;
+      }
+
+      .single-img-wrap {
+        max-width: 280px;
+        margin-top: 16px;
+        border-radius: 10px;
+        border: 1.5px solid var(--border);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        cursor: zoom-in;
+        background: #f0f1f4;
+      }
+      .single-img-wrap img {
+        width: 100%;
+        display: block;
+        object-fit: contain;
+      }
+
+      /* ---- Lightbox overlay ---- */
+      #lightbox {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 17, 24, 0.85);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        cursor: zoom-out;
+      }
+      #lightbox.active {
+        display: flex;
+      }
+      #lightbox img {
+        max-width: 88vw;
+        max-height: 82vh;
+        object-fit: contain;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+      }
+      #lightboxLabel {
+        color: white;
+        font-size: 14px;
+        margin-top: 14px;
+        opacity: 0.85;
+      }
+      #lightboxClose {
+        position: absolute;
+        top: 22px;
+        right: 28px;
+        color: white;
+        font-size: 28px;
+        cursor: pointer;
+        opacity: 0.8;
+      }
+      #lightboxClose:hover {
+        opacity: 1;
+      }
+
+      .hider-box {
+        border: 1.5px solid var(--border);
+        border-radius: 11px;
+        padding: 14px;
+        margin-top: 12px;
+        background: #fbfcfe;
+      }
+      .hider-box label {
+        margin-top: 0;
+      }
+
+      .screen {
+        display: none;
+      }
+      .screen.active {
+        display: block;
+        animation: fadeIn 0.25s ease;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(4px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <header>
+        <h1>🔐 Reversible Data Hiding in Encrypted Images</h1>
+        <p class="credits-line" id="creditsNames">Loading credits...</p>
+        <p class="credits-line" id="creditsInstitute"></p>
+      </header>
+
+      <div class="progress" id="progressBar">
+        <span id="step0">● Setup</span><span>→</span>
+        <span id="step1">○ Owner</span><span>→</span>
+        <span id="step2">○ Hiders</span><span>→</span>
+        <span id="step3">○ Receiver</span>
+      </div>
+
+      <div class="card">
+        <div class="screen active" id="screen-setup">
+          <h2>Step 1 — Configure the Scenario</h2>
+          <p class="desc">
+            Choose how many independent Hiders will take part. Each Hider gets
+            one encrypted share and hides their own secret. Only the Receiver
+            ever combines shares.
+          </p>
+          <label>Number of Hiders</label>
+          <input type="number" id="numHiders" value="3" min="2" max="8" />
+          <div class="hint" id="hiderLimitHint"></div>
+          <button id="beginBtn" onclick="beginSetup()">Begin →</button>
+          <div id="setupMsg"></div>
+        </div>
+
+        <div class="screen" id="screen-owner">
+          <h2>Step 2 — Image Owner: Encrypt &amp; Distribute</h2>
+          <p class="desc">
+            Upload a cover image (color supported). It will be split into
+            encrypted shares — one per Hider. The Owner keeps no copy. Click any
+            image below to view it full size.
+          </p>
+          <label>Cover Image</label>
+          <input type="file" id="imageFile" accept="image/*" />
+          <button id="encryptBtn" onclick="ownerEncrypt()">
+            🔒 Encrypt &amp; Split Image
+          </button>
+          <div id="ownerMsg"></div>
+          <div class="gallery" id="shareGallery"></div>
+          <button
+            class="secondary"
+            id="ownerNextBtn"
+            style="display: none"
+            onclick="goToHiders()"
+          >
+            Continue to Hiders →
+          </button>
+        </div>
+
+        <div class="screen" id="screen-hiders">
+          <h2>Step 3 — Hiders: Each Embeds Their Own Secret</h2>
+          <p class="desc" id="capacityHint"></p>
+          <div id="hiderInputs"></div>
+          <button id="embedBtn" onclick="hidersEmbed()">
+            📝 All Hiders Embed
+          </button>
+          <div id="hidersMsg"></div>
+          <div class="gallery" id="markedGallery"></div>
+          <button
+            class="secondary"
+            id="hidersNextBtn"
+            style="display: none"
+            onclick="goToReceiver()"
+          >
+            Continue to Receiver →
+          </button>
+        </div>
+
+        <div class="screen" id="screen-receiver">
+          <h2>Step 4 — Receiver: Combine, Decrypt &amp; Extract</h2>
+          <p class="desc">
+            The Receiver is the only party that ever combines shares back
+            together.
+          </p>
+          <button id="extractBtn" onclick="receiverReconstruct()">
+            📥 Combine &amp; Extract
+          </button>
+          <div id="receiverMsg"></div>
+          <div
+            class="single-img-wrap"
+            id="recoveredWrap"
+            style="display: none"
+            onclick="
+              openLightbox(
+                document.getElementById('recoveredImg').src,
+                'Recovered original image',
+              )
+            "
+          >
+            <img id="recoveredImg" />
+          </div>
+          <button class="secondary" onclick="location.reload()">
+            ↺ Run Demo Again
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="lightbox" onclick="closeLightbox()">
+      <span id="lightboxClose" onclick="closeLightbox()">✕</span>
+      <img id="lightboxImg" src="" />
+      <div id="lightboxLabel"></div>
+    </div>
+
+    <script>
+      const API = "http://127.0.0.1:8000";
+      let sessionId = null;
+      let numHiders = 0;
+      let capacityBits = 0;
+
+      async function api(path, options = {}) {
+        const res = await fetch(API + path, options);
+        const data = await res.json();
+        if (!res.ok) {
+          const detail = Array.isArray(data.detail)
+            ? data.detail.map((d) => d.msg).join(", ")
+            : data.detail;
+          throw new Error(detail || "Request failed");
+        }
+        return data;
+      }
+
+      function showMsg(elId, text, type) {
+        document.getElementById(elId).innerHTML =
+          `<div class="msg ${type}">${text}</div>`;
+      }
+      function clearMsg(elId) {
+        document.getElementById(elId).innerHTML = "";
+      }
+
+      function setProgress(step) {
+        const ids = ["step0", "step1", "step2", "step3"];
+        const labels = ["Setup", "Owner", "Hiders", "Receiver"];
+        ids.forEach((id, i) => {
+          const el = document.getElementById(id);
+          el.className = i === step ? "active" : i < step ? "done" : "";
+          el.innerText =
+            (i === step ? "● " : i < step ? "✓ " : "○ ") + labels[i];
+        });
+      }
+      function showScreen(id) {
+        document
+          .querySelectorAll(".screen")
+          .forEach((s) => s.classList.remove("active"));
+        document.getElementById(id).classList.add("active");
+      }
+      function withLoading(btnId, fn, loadingText) {
+        return async (...args) => {
+          const btn = document.getElementById(btnId);
+          const original = btn.innerText;
+          btn.disabled = true;
+          btn.innerText = loadingText;
+          try {
+            await fn(...args);
+          } finally {
+            btn.disabled = false;
+            btn.innerText = original;
+          }
+        };
+      }
+
+      // ---- Lightbox ----
+      function openLightbox(src, label) {
+        document.getElementById("lightboxImg").src = src;
+        document.getElementById("lightboxLabel").innerText = label || "";
+        document.getElementById("lightbox").classList.add("active");
+      }
+      function closeLightbox() {
+        document.getElementById("lightbox").classList.remove("active");
+      }
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeLightbox();
+      });
+
+      function makeThumb(container, b64, label) {
+        const wrap = document.createElement("div");
+        wrap.className = "thumb-wrap";
+        wrap.onclick = () =>
+          openLightbox("data:image/png;base64," + b64, label);
+        const img = document.createElement("img");
+        img.src = "data:image/png;base64," + b64;
+        wrap.appendChild(img);
+        const tag = document.createElement("div");
+        tag.className = "thumb-label";
+        tag.innerText = label;
+        wrap.appendChild(tag);
+        container.appendChild(wrap);
+      }
+
+      // ---- On load ----
+      (async () => {
+        try {
+          const limits = await api("/api/limits");
+          document.getElementById("numHiders").min = limits.min_hiders;
+          document.getElementById("numHiders").max = limits.max_hiders;
+          document.getElementById("hiderLimitHint").innerText =
+            `Must be between ${limits.min_hiders} and ${limits.max_hiders}.`;
+        } catch (e) {
+          document.getElementById("hiderLimitHint").innerText =
+            "⚠️ Could not reach backend — make sure the server is running.";
+        }
+        try {
+          const about = await api("/api/about");
+          document.getElementById("creditsNames").innerHTML =
+            `<b>Team:</b> ${about.implemented_by.join(", ")}`;
+          document.getElementById("creditsInstitute").innerHTML =
+            about.institution;
+        } catch (e) {
+          document.getElementById("creditsNames").innerText = "";
+        }
+      })();
+
+      // ---- Step 1: Setup ----
+      const beginSetup = withLoading(
+        "beginBtn",
+        async () => {
+          clearMsg("setupMsg");
+          const n = parseInt(document.getElementById("numHiders").value);
+          const session = await api("/api/session", { method: "POST" });
+          sessionId = session.session_id;
+          await api("/api/setup", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ num_hiders: n }),
+          }).catch((e) => {
+            showMsg("setupMsg", "❌ " + e.message, "error");
+            throw e;
+          });
+          numHiders = n;
+          showScreen("screen-owner");
+          setProgress(1);
+        },
+        "Setting up...",
+      );
+
+      // ---- Step 2: Owner ----
+      const ownerEncrypt = withLoading(
+        "encryptBtn",
+        async () => {
+          clearMsg("ownerMsg");
+          document.getElementById("shareGallery").innerHTML = "";
+          document.getElementById("ownerNextBtn").style.display = "none";
+
+          const fileInput = document.getElementById("imageFile");
+          if (!fileInput.files.length) {
+            showMsg("ownerMsg", "❌ Please choose an image first.", "error");
+            return;
+          }
+          const formData = new FormData();
+          formData.append("session_id", sessionId);
+          formData.append("num_hiders", numHiders);
+          formData.append("file", fileInput.files[0]);
+
+          try {
+            const result = await api("/api/owner/encrypt", {
+              method: "POST",
+              body: formData,
+            });
+            capacityBits = result.capacity_bits;
+            showMsg(
+              "ownerMsg",
+              `<strong>Encryption complete</strong> — image split into ${numHiders} shares.`,
+              "success",
+            );
+            const gallery = document.getElementById("shareGallery");
+            makeThumb(gallery, result.original_preview, "Original");
+            result.share_previews.forEach((b64, i) =>
+              makeThumb(gallery, b64, `Share #${i + 1}`),
+            );
+            document.getElementById("ownerNextBtn").style.display =
+              "inline-block";
+          } catch (e) {
+            showMsg("ownerMsg", "❌ " + e.message, "error");
+          }
+        },
+        "Encrypting...",
+      );
+
+      function goToHiders() {
+        showScreen("screen-hiders");
+        setProgress(2);
+        document.getElementById("capacityHint").innerText =
+          `This image can hold up to ${capacityBits} bits total (~${Math.floor(capacityBits / 8)} characters), combined across all ${numHiders} Hiders.`;
+        const container = document.getElementById("hiderInputs");
+        container.innerHTML = "";
+        for (let i = 0; i < numHiders; i++) {
+          const div = document.createElement("div");
+          div.className = "hider-box";
+          div.innerHTML = `<label>Hider #${i + 1}'s Secret</label>
+      <textarea id="hiderSecret${i}" placeholder="Type Hider ${i + 1}'s secret message"></textarea>`;
+          container.appendChild(div);
+        }
+      }
+
+      // ---- Step 3: Hiders ----
+      const hidersEmbed = withLoading(
+        "embedBtn",
+        async () => {
+          clearMsg("hidersMsg");
+          document.getElementById("markedGallery").innerHTML = "";
+          document.getElementById("hidersNextBtn").style.display = "none";
+
+          const secrets = [];
+          for (let i = 0; i < numHiders; i++) {
+            const text = document.getElementById("hiderSecret" + i).value;
+            secrets.push({ hider_id: i, secret_text: text });
+          }
+
+          try {
+            const result = await api("/api/hiders/embed", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ session_id: sessionId, secrets: secrets }),
+            });
+            showMsg(
+              "hidersMsg",
+              `<strong>Embedding complete</strong> — all ${numHiders} Hiders embedded their secrets.\nStego PSNR = ${result.psnr_marked.toFixed(2)} dB`,
+              "success",
+            );
+            const gallery = document.getElementById("markedGallery");
+            makeThumb(gallery, result.marked_full_preview, "Marked (combined)");
+            result.marked_share_previews.forEach((b64, i) =>
+              makeThumb(gallery, b64, `Marked Share #${i + 1}`),
+            );
+            document.getElementById("hidersNextBtn").style.display =
+              "inline-block";
+          } catch (e) {
+            showMsg("hidersMsg", "❌ " + e.message, "error");
+          }
+        },
+        "Embedding...",
+      );
+
+      function goToReceiver() {
+        showScreen("screen-receiver");
+        setProgress(3);
+      }
+
+      // ---- Step 4: Receiver ----
+      const receiverReconstruct = withLoading(
+        "extractBtn",
+        async () => {
+          clearMsg("receiverMsg");
+          document.getElementById("recoveredWrap").style.display = "none";
+          try {
+            const formData = new FormData();
+            formData.append("session_id", sessionId);
+            const result = await api("/api/receiver/reconstruct", {
+              method: "POST",
+              body: formData,
+            });
+
+            let secretsText = result.extracted_secrets
+              .map((s, i) => `  • Hider ${i + 1}: "${s}"`)
+              .join("\n");
+            let statusText =
+              result.all_match && result.lossless
+                ? "Verified — lossless recovery."
+                : "Mismatch detected.";
+            showMsg(
+              "receiverMsg",
+              `Extracted secrets:\n${secretsText}\n\nAll match: ${result.all_match}\nLossless recovery: ${result.lossless}\n\n${statusText}`,
+              result.all_match && result.lossless ? "success" : "error",
+            );
+
+            document.getElementById("recoveredImg").src =
+              "data:image/png;base64," + result.recovered_image;
+            document.getElementById("recoveredWrap").style.display = "block";
+          } catch (e) {
+            showMsg("receiverMsg", "❌ " + e.message, "error");
+          }
+        },
+        "Reconstructing...",
+      );
+    </script>
+  </body>
+</html>
